@@ -76,13 +76,6 @@ android {
 
 dependencies {
     compile project(':twitter')
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:design:22.2.0'
-
-    debugCompile rootProject.leakCanary
-    releaseCompile rootProject.leakCanaryNoOp
-
-    androidTestCompile rootProject.spoon
-    androidTestCompile rootProject.espresso
-    androidTestCompile rootProject.androidTestingSupport
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
 }

@@ -78,5 +78,8 @@
             android:name=".tweetui.TweetPreviewActivity"
             android:label="@string/kit_tweetui"/>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="187f4d09e4a79ce3ae37370099e151e74e2910e4" />
     </application>
 </manifest>

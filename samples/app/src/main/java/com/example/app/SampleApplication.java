@@ -21,20 +21,22 @@ import android.app.Application;
 import android.os.StrictMode;
 import android.util.Log;
 
-import io.fabric.sdk.android.DefaultLogger;
-import io.fabric.sdk.android.Fabric;
-
-import com.squareup.leakcanary.LeakCanary;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
+import io.fabric.sdk.android.Fabric;
+
 public class SampleApplication extends Application {
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "HVJ5J3qKfM87GTeIHSBNlE6So";
+    private static final String TWITTER_SECRET = "prmh74D1Mrfl1k8FxmPfVu8K30aIO97tqtW2ISFy8Cfk6KS2jP";
+
     private static final String TAG = SampleApplication.class.getSimpleName();
 
     @Override
     public void onCreate() {
         super.onCreate();
-        LeakCanary.install(this);
 
         Log.d(TAG, "Setting up StrictMode policy checking.");
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -47,15 +49,7 @@ public class SampleApplication extends Application {
                 .penaltyLog()
                 .build());
 
-        final TwitterAuthConfig authConfig = new TwitterAuthConfig(BuildConfig.CONSUMER_KEY,
-                BuildConfig.CONSUMER_SECRET);
-
-        final Fabric fabric = new Fabric.Builder(this)
-                .kits(new Twitter(authConfig))
-                .logger(new DefaultLogger(Log.DEBUG))
-                .debuggable(true)
-                .build();
-
-        Fabric.with(fabric);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
     }
 }
