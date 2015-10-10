@@ -19,36 +19,31 @@ package com.twitter.sdk.android;
 
 import android.app.Activity;
 
-import com.digits.sdk.android.Digits;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Session;
 import com.twitter.sdk.android.core.SessionManager;
 import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.tweetcomposer.TweetComposer;
-import io.fabric.sdk.android.Fabric;
-import io.fabric.sdk.android.Kit;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.tweetui.TweetUi;
-import io.fabric.sdk.android.KitGroup;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterSession;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import io.fabric.sdk.android.BuildConfig;
+import io.fabric.sdk.android.Fabric;
+import io.fabric.sdk.android.Kit;
+import io.fabric.sdk.android.KitGroup;
+
 /**
  * Grouping of Twitter related Kits including {@link com.twitter.sdk.android.core.TwitterCore}
- * and {@link com.twitter.sdk.android.tweetui.TweetUi}.
  *
  * Must be provided to {@link io.fabric.sdk.android.Fabric#with(android.content.Context, io.fabric.sdk.android.Kit[])}
  * to initialize contained kits.
  */
 public class Twitter extends Kit implements KitGroup {
     public final TwitterCore core;
-    public final TweetUi tweetUi;
-    public final TweetComposer tweetComposer;
-    public final Digits digits;
     public final Collection<? extends Kit> kits;
 
     public static Twitter getInstance() {
@@ -63,11 +58,7 @@ public class Twitter extends Kit implements KitGroup {
 
     public Twitter(TwitterAuthConfig config) {
         core = new TwitterCore(config);
-        tweetUi = new TweetUi();
-        tweetComposer = new TweetComposer();
-        digits = new Digits();
-        kits = Collections.unmodifiableCollection(Arrays.asList(core, tweetUi, tweetComposer,
-                digits));
+        kits = Collections.unmodifiableCollection(Arrays.asList(core));
     }
 
     @Override
